@@ -30,8 +30,9 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Titolo</th>
-                <th scope="col">Image</th>
+                <th scope="col">Nome Progetto</th>
+                <th scope="col">Nome Cliente</th>
+                <th scope="col">Data</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -39,8 +40,9 @@
             @foreach ($projects as $project)
                 <tr>
                     <th scope="row">{{ $project->id }}</th>
-                    <td>{{ $project->title }}</td>
-                    <td>{{ $project->url_image }}</td>
+                    <td>{{ $project->name }}</td>
+                    <td>{{ $project->client_name }}</td>
+                    <td>{{ $project->date }}</td>
                     <td>
                         <a class="btn btn-primary" href="{{ route('admin.projects.show', ['project' => $project->id]) }}">View</a>
                         <a class="btn btn-warning" href="{{ route('admin.projects.edit', ['project' => $project->id]) }}">Edit</a>
