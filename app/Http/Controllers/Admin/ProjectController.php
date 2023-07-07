@@ -8,6 +8,21 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    private $validations = [
+        'name'          => 'required|string|min:5|max:50',
+        'client_name'   => 'required|string|min:3|max:30',
+        'date'          => 'required|date', 
+        'cover_image'   => 'required|url|max:200', 
+        'summary'       => 'required|string',
+    ];
+
+    private $validations_messages = [
+        'required'      => 'Il campo :attribute è obbligatorio',
+        'min'           => 'Il campo :attribute deve contenere almeno :min caratteri',
+        'max'           => 'Il campo :attribute deve contenere almeno :max caratteri',
+        'url'           => 'Il campo deve essere un url valido',
+        'date'          => 'Il campo :attribute deve essere in formato yyyy/mm/dd',
+    ]; 
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +41,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -37,7 +52,19 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validations, $this->validations_messages);
+
+        $data = $request->all();
+
+        $newProject = new Project();
+        $newProject->name           = $data['name'];
+        $newProject->client_name    = $data['client_name'];
+        $newProject->date           = $data['date'];
+        $newProject->cover_image    = $data['cover_image'];
+        $newProject->summary        = $data['summary'];
+        $newProject->save();
+
+        return to_route('admin.projects.show', ['project' => $newProject]);
     }
 
     /**
@@ -59,7 +86,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -71,7 +98,18 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $request->validate($this->validations, $this->validations_messages);
+
+        $data = $request->all();
+
+        $project->name           = $data['name'];
+        $project->client_name    = $data['client_name'];
+        $project->date           = $data['date'];
+        $project->cover_image    = $data['cover_image'];
+        $project->summary        = $data['summary'];
+        $project->update();
+
+        return to_route('admin.projects.show', ['project' => $project]);
     }
 
     /**
@@ -82,6 +120,6 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        
     }
 }

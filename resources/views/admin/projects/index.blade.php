@@ -44,10 +44,10 @@
                     <td>{{ $project->client_name }}</td>
                     <td>{{ $project->date }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('admin.projects.show', ['project' => $project->id]) }}">View</a>
-                        <a class="btn btn-warning" href="{{ route('admin.projects.edit', ['project' => $project->id]) }}">Edit</a>
+                        <a class="btn btn-primary" href="{{ route('admin.projects.show', ['project' => $project]) }}">View</a>
+                        <a class="btn btn-warning" href="{{ route('admin.projects.edit', ['project' => $project]) }}">Edit</a>
                         <form
-                            action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}"
+                            action="{{ route('admin.projects.destroy', ['project' => $project]) }}"
                             method="project"
                             class="d-inline-block"
                         >
