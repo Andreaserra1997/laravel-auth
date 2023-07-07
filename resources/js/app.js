@@ -12,7 +12,7 @@ if (confirmDelete) {
         button.addEventListener("click", function () {
             confirmDelete.action = confirmDelete.dataset.template.replace(
                 "*****",
-                this.database.id
+                this.dataset.id
             );
         });
     });

@@ -73,6 +73,7 @@
                         data-template="{{ route('admin.projects.destroy', ['project' => '*****']) }}"
                         method="post"
                         class="d-inline-block"
+                        id="confirm-delete"
                     >
                         @csrf
                         @method('delete')
